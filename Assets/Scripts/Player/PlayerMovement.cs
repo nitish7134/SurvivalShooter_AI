@@ -35,8 +35,7 @@ public class PlayerMovement : MonoBehaviour
                         KillEnemy();
                     else if (interDist < minDistanceMaintain)
                     {
-                        
-                        navMeshAgent.destination = Vector3.MoveTowards(transform.position, enemy.transform.position, interDist - distanceMaintain);
+                        navMeshAgent.destination = transform.position - ((enemy.transform.position - transform.position).normalized * minDistanceMaintain);
                         Debug.Log("To Close Moving Back; from " + transform.position + " to " + navMeshAgent.destination + " away from " + enemy.transform.position);
                         navMeshAgent.isStopped = false;
                         anim.SetBool("IsWalking", true);
@@ -78,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
         int enIndex=0;
         for(int i = 0; i < enemies.Count; i++)
         {
+            if (enemies[i] == null && !ReferenceEquals(enemies[i], null))
+                enemies.RemoveAt(i);
             temp = Vector3.Distance(transform.position, enemies[i].transform.position);
             if (temp < minDist) {
                 minDist = temp;

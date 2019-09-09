@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 54408674000823144}
   - component: {fileID: 136034324129040268}
   - component: {fileID: 135320645469279318}
-  - component: {fileID: 195478759996618460}
   - component: {fileID: 114489451657534574}
   - component: {fileID: 114858573952562612}
   - component: {fileID: 82684988033110934}
@@ -103,28 +102,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!195 &195478759996618460
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161934229116340}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.3
-  m_Speed: 2.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 1
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.1
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &114489451657534574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +132,7 @@ MonoBehaviour:
   scoreValue: 10
   deathClip: {fileID: 8300000, guid: 62366b8d2c37a49dca550841c741317f, type: 3}
   enemyManager: {fileID: 0}
+  isDead: 0
 --- !u!82 &82684988033110934
 AudioSource:
   m_ObjectHideFlags: 0

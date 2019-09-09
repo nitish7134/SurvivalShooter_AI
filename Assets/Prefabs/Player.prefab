@@ -5445,6 +5445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec45203ae7a1a54c9d02c355f983833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killWaitTime: 4
-  distanceMaintain: 3
-  minDistanceMaintain: 1
+  enemies: []
+  distanceMaintain: 5
+  minDistanceMaintain: 3
+  isKilling: 0
