@@ -15,8 +15,6 @@ public class PlayerShooting : MonoBehaviour
     AudioSource gunAudio;
     Light gunLight;
     float effectsDisplayTime = 0.2f;
-    public bool shouldShoot;
-
 
     void Awake ()
     {
@@ -27,17 +25,13 @@ public class PlayerShooting : MonoBehaviour
         gunLight = GetComponent<Light> ();
     }
 
-    public void setShoot(bool temp)
-    {
-        Debug.Log("Start Shooting ");
-        shouldShoot = temp;
-    }
+    
 
     void Update ()
     {
         timer += Time.deltaTime;
 
-		if(shouldShoot && timer >= timeBetweenBullets && Time.timeScale != 0)
+		if(MasterClass.shouldShoot && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             Debug.Log("shot");
             Shoot ();

@@ -2,12 +2,12 @@
 
 public class EnemyHealth : MonoBehaviour
 {
+    
     public int startingHealth = 100;
     public int currentHealth;
     public float sinkSpeed = 2.5f;
     public int scoreValue = 10;
     public AudioClip deathClip;
-    public EnemyManager enemyManager;
 
     Animator anim;
     AudioSource enemyAudio;
@@ -23,7 +23,6 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio = GetComponent <AudioSource> ();
         hitParticles = GetComponentInChildren <ParticleSystem> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
-        enemyManager = FindObjectOfType<EnemyManager>();
         currentHealth = startingHealth;
     }
 
@@ -58,7 +57,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Death ()
     {
-        enemyManager.spawnCount--;
+        MasterClass.spawnCount--;
         isDead = true;
         capsuleCollider.isTrigger = true;
         anim.SetTrigger ("Dead");
