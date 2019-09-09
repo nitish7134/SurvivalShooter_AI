@@ -609,6 +609,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 3
+--- !u!114 &724982589 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114291914702536300, guid: 9e3e72cd89ef44f97afe08f9baaabc18,
+    type: 3}
+  m_PrefabInstance: {fileID: 1299572195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724982587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec45203ae7a1a54c9d02c355f983833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1072118398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1063,11 @@ PrefabInstance:
         type: 3}
       propertyPath: distanceMaintain
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114291914702536300, guid: 9e3e72cd89ef44f97afe08f9baaabc18,
+        type: 3}
+      propertyPath: minDistanceMaintain
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e3e72cd89ef44f97afe08f9baaabc18, type: 3}
@@ -1514,11 +1531,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99222b1e4a384e923ac7e86efc709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
   enemy: {fileID: 1719079804300652, guid: 4e3b7f611582d4dc7a9dd318242ed5e3, type: 3}
   player: {fileID: 724982587}
   maxSpawn: 5
   spawnCount: 0
+  playerMovement: {fileID: 724982589}
 --- !u!4 &2135234548
 Transform:
   m_ObjectHideFlags: 0

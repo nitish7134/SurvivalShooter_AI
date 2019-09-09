@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,67 +9,56 @@ public class PlayerMovement : MonoBehaviour
 	private Animator anim;
     private GameObject enemy;
     private EnemyHealth enemyHealth;
-    
     private PlayerShooting playerShooting;
-    private GameObject[] enemies;
-    public float distanceMaintain = 3f;
-    public float minDistanceMaintain = 1.5f;
+
+    public List <GameObject> enemies = new List<GameObject>();
+    public float distanceMaintain = 5f;
+    public float minDistanceMaintain = 3f;
     public bool isKilling = false;
+
     void Awake()
 	{
         navMeshAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         playerShooting = GetComponentInChildren<PlayerShooting>();
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            NextEnemy();
-        
         if (!isKilling)
         {
-            if (enemy != null)
+            if (enemies.Count != 0)
             {
-                
-                float interDist = Vector3.Distance(transform.position, enemy.transform.position);
-                if (interDist <= distanceMaintain && interDist >= minDistanceMaintain)
+                if (enemy != null)
                 {
-  
-                    navMeshAgent.destination = transform.position;
-                    navMeshAgent.isStopped = true;
-
-                    isKilling = true;
-                    KillEnemy();
-
+                    float interDist = Vector3.Distance(transform.position, enemy.transform.position);
+                    if (interDist <= distanceMaintain && interDist >= minDistanceMaintain)
+                        KillEnemy();
+                    else if (interDist < minDistanceMaintain)
+                    {
+                        
+                        navMeshAgent.destination = Vector3.MoveTowards(transform.position, enemy.transform.position, interDist - distanceMaintain);
+                        Debug.Log("To Close Moving Back; from " + transform.position + " to " + navMeshAgent.destination + " away from " + enemy.transform.position);
+                        navMeshAgent.isStopped = false;
+                        anim.SetBool("IsWalking", true);
+                    }
                 }
-                else if (interDist < minDistanceMaintain)
-                {
-                    navMeshAgent.destination = Vector3.MoveTowards(transform.position, enemy.transform.position,interDist-distanceMaintain);
-                    navMeshAgent.isStopped = false;
-
-                    anim.SetBool("IsWalking", true);
-                }
-
+                else
+                    NextEnemy();
             }
-            else
-                NextEnemy();
+            return;
         }
-        else if (enemyHealth.currentHealth<=0)
+        else if (enemyHealth.currentHealth <= 0)
         {
             playerShooting.setShoot(false);
+            enemies.Remove(enemy);
             isKilling = false;
-            enemy = null;
             NextEnemy();
         }
-
     }
  
-    void NextEnemy()
+    public void NextEnemy()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        if (enemies.Length <= 0)
+        if (enemies.Count <= 0)
         {
             enemy = null;
             return;
@@ -86,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         float minDist = 5000;
         float temp;
         int enIndex=0;
-        for(int i = 0; i < enemies.Length; i++)
+        for(int i = 0; i < enemies.Count; i++)
         {
             temp = Vector3.Distance(transform.position, enemies[i].transform.position);
             if (temp < minDist) {
@@ -99,10 +89,13 @@ public class PlayerMovement : MonoBehaviour
     }
     public void KillEnemy()
     {
+        isKilling = true;
+        navMeshAgent.destination = transform.position;
+        navMeshAgent.isStopped = true;
         anim.SetBool("IsWalking", false);
         transform.LookAt(enemy.transform);
-
         playerShooting.setShoot(true);
+
     }
     
 }
